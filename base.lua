@@ -341,7 +341,7 @@ function courseplay:onLeaveVehicle()
 	if self.cp.mouseCursorActive then
 		courseplay:setMouseCursor(self, false);
     	courseEditor:reset()
-		courseplay.guiManager:onLeaveVehicle()
+		courseplay.guiManager:executeExternFunction(courseplay.guiManager.onLeaveVehicle)
 	end
 	---Update mouse action event texts
 	CpManager:updateMouseInputText()
@@ -361,7 +361,7 @@ function courseplay:onEnterVehicle()
 	end;
 	---Update mouse action event texts
 	CpManager:updateMouseInputText()
-	courseplay.guiManager:onEnterVehicle(self)
+	courseplay.guiManager:executeExternFunction(courseplay.guiManager.onEnterVehicle,self)
 
 	if self:getIsCourseplayDriving() and self.steeringEnabled then
 		self.steeringEnabled = false;
@@ -378,8 +378,7 @@ function courseplay:onDraw()
 	end
 	
 	courseEditor:draw(self, self.cp.directionNode)
-  	courseplay.guiManager:draw()
-
+	courseplay.guiManager:executeExternFunction(courseplay.guiManager.draw)
 	courseplay:showAIMarkers(self)
 	courseplay:showTemporaryMarkers(self)
 	if self.cp.driver then 

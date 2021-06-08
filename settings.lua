@@ -3812,8 +3812,7 @@ DriverModeSetting.NUM_MODES = 10
 
 DriverModeSetting.defaultMode = 5
 
-function DriverModeSetting:init(vehicle,mainCpGui)
-	self.mainCpGui = mainCpGui
+function DriverModeSetting:init(vehicle)
 	local values = {}
 	local texts = {}
 	for i=1,self.NUM_MODES do 
@@ -3824,21 +3823,17 @@ function DriverModeSetting:init(vehicle,mainCpGui)
 	self:set(self.defaultMode)
 end
 
-function DriverModeSetting:validateCurrentValue(vehicle)
-	if not vehicle then 
-		return
-	end
+function DriverModeSetting:validateCurrentValue()
 	self.validModes = {}
 	local wasResetToDefault = false
 	for i=1,self.NUM_MODES do 
-		local valid = courseplay:getIsToolCombiValidForCpMode(vehicle,i)
+		local valid = courseplay:getIsToolCombiValidForCpMode(self.vehicle,i)
 		self.validModes[i] = valid or false
 		if self:get() == i and not valid then 
 			self:resetToDefault()
 			wasResetToDefault = true
 		end
 	end
-	self.mainCpGui:validateModeButtons(self.validModes,self:get(),wasResetToDefault)
 end
 
 function DriverModeSetting:onChange()
@@ -3907,10 +3902,10 @@ function SettingsContainer:loadFromXML(xml, parentKey)
 	end
 end
 
-function SettingsContainer:validateCurrentValues(vehicle)
+function SettingsContainer:validateCurrentValues()
 	for k, setting in pairs(self) do
 		if self.validateSetting(setting) then 
-			setting:validateCurrentValue(vehicle)
+			setting:validateCurrentValue()
 		end
 	end
 end
@@ -4047,7 +4042,7 @@ function SettingsContainer.createVehicleSpecificSettings(vehicle)
 	container:addSetting(ToolOffsetZSetting, vehicle)
 	container:addSetting(MixerWagonAIDriver_SiloSelectedFillTypeSetting, vehicle)
 	container:addSetting(MixerWagonToolPositionsSetting, vehicle)
-	container:addSetting(DriverModeSetting, vehicle,courseplay.guiManager.mainCpGui)
+	container:addSetting(DriverModeSetting, vehicle)
 	return container
 end
 
