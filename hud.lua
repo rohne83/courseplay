@@ -778,10 +778,10 @@ function courseplay.hud:updatePageContent(vehicle, page)
 					--SaveFuelOptionSetting
 					vehicle.cp.hud.content.pages[page][line][1].text = vehicle.cp.settings.saveFuelOption:getLabel()
 					vehicle.cp.hud.content.pages[page][line][2].text = vehicle.cp.settings.saveFuelOption:getText() 
-				elseif entry.functionToCall == 'allwaysSearchFuel:toggle' then
+				elseif entry.functionToCall == 'alwaysSearchFuel:toggle' then
 					--AlwaysSearchFuelSetting
-					vehicle.cp.hud.content.pages[page][line][1].text = vehicle.cp.settings.allwaysSearchFuel:getLabel()
-					vehicle.cp.hud.content.pages[page][line][2].text = vehicle.cp.settings.allwaysSearchFuel:getText()
+					vehicle.cp.hud.content.pages[page][line][1].text = vehicle.cp.settings.alwaysSearchFuel:getLabel()
+					vehicle.cp.hud.content.pages[page][line][2].text = vehicle.cp.settings.alwaysSearchFuel:getText()
 				elseif entry.functionToCall == 'changeLoadUnloadOffsetX' then
 					vehicle.cp.hud.content.pages[page][line][1].text = courseplay:loc('COURSEPLAY_LOAD_UNLOAD_OFFSET_X');
 					if vehicle.cp.loadUnloadOffsetX and vehicle.cp.loadUnloadOffsetX ~= 0 then
@@ -2140,7 +2140,7 @@ function courseplay.hud:setAIDriverContent(vehicle)
 	self:enablePageButton(vehicle, 7)
 	self:addSettingsRow(vehicle,vehicle.cp.settings.warningLightsMode,'next', 7, 1, 1 )
 	self:addRowButton(vehicle,vehicle.cp.settings.saveFuelOption,'toggle', 7, 2, 1 )
-	self:addRowButton(vehicle,vehicle.cp.settings.allwaysSearchFuel,'toggle', 7, 3, 1 )
+	self:addRowButton(vehicle,vehicle.cp.settings.alwaysSearchFuel,'toggle', 7, 3, 1 )
 	self:addRowButton(vehicle,vehicle.cp.settings.automaticCoverHandling,'toggle', 7, 4, 1 )
 	self:addSettingsRow(vehicle,nil,'changeWaitTime', 7, 5, 1 )
 	
