@@ -36,7 +36,6 @@ function TriggerHandler:init(driver,vehicle,siloSelectedFillTypeSetting)
 	self.debugChannel = courseplay.DBG_TRIGGERS
 	self.lastDistanceToTrigger = nil
 	self.lastDebugLoadingCallback = nil
-	self.bunkerSilo = nil
 end 
 
 function TriggerHandler:isDebugActive()
@@ -349,7 +348,6 @@ function TriggerHandler:resetLoadingState()
 	if not self:isDriveNowActivated() then
 		self:changeLoadingState("NOTHING")
 	end
-	self.augerTriggerSpeed=nil
 	self:resetFillableObject()
 end
 
@@ -410,7 +408,7 @@ function TriggerHandler:forceStopLoading()
 			end
 		else 
 			if self.fillableObject.isLoading then -- disable filling at fillTriggers
-				self:debug(object,"forceStop setFillUnitIsFilling")
+				self:debug(self.fillableObject,"forceStop setFillUnitIsFilling")
 				self.fillableObject.object:setFillUnitIsFilling(false)
 			elseif self.fillableObject.object.setDischargeState then -- disable unloading
 				self.fillableObject.object:setDischargeState(Dischargeable.DISCHARGE_STATE_OFF)
