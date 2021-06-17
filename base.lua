@@ -321,7 +321,6 @@ function courseplay:onLoad(savegame)
 	self.cp.settings = SettingsContainer.createVehicleSpecificSettings(self)
 
 	---@type SettingsContainer
-
 	self.cp.courseGeneratorSettings = SettingsContainer.createCourseGeneratorSettings(self)
 
 	courseplay.signs:updateWaypointSigns(self);
